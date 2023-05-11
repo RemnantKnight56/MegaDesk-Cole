@@ -39,17 +39,12 @@
             materialLabel = new Label();
             rushBox = new ComboBox();
             rushOrderLabel = new Label();
-            label1 = new Label();
-            label2 = new Label();
-            numDrawersErrorText = new Label();
-            materialErrorText = new Label();
-            rushOrderErrorText = new Label();
             confirmButton = new Button();
-            errorProvider1 = new ErrorProvider(components);
+            errorProvider = new ErrorProvider(components);
             depthInput = new TextBox();
             widthInput = new TextBox();
             ((System.ComponentModel.ISupportInitialize)drawerUpDown).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             SuspendLayout();
             // 
             // drawerUpDown
@@ -58,14 +53,16 @@
             drawerUpDown.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
             drawerUpDown.Name = "drawerUpDown";
             drawerUpDown.Size = new Size(64, 23);
-            drawerUpDown.TabIndex = 2;
+            drawerUpDown.TabIndex = 4;
+            drawerUpDown.ValueChanged += DrawerUpDown_ValueChanged;
             // 
             // nameInput
             // 
             nameInput.Location = new Point(149, 26);
             nameInput.Name = "nameInput";
-            nameInput.Size = new Size(213, 23);
-            nameInput.TabIndex = 3;
+            nameInput.Size = new Size(168, 23);
+            nameInput.TabIndex = 1;
+            nameInput.TextChanged += NameInput_TextChanged;
             // 
             // nameLabel
             // 
@@ -111,12 +108,13 @@
             // 
             surfaceBox.DropDownStyle = ComboBoxStyle.DropDownList;
             surfaceBox.FormattingEnabled = true;
-            surfaceBox.Items.AddRange(new object[] { "Laminate", "Oak", "Rosewood", "Veneer", "Pine" });
+            surfaceBox.Items.AddRange(new object[] { "Pine", "Laminate", "Veneer", "Oak", "Rosewood" });
             surfaceBox.Location = new Point(149, 142);
             surfaceBox.MaxDropDownItems = 5;
             surfaceBox.Name = "surfaceBox";
             surfaceBox.Size = new Size(108, 23);
-            surfaceBox.TabIndex = 8;
+            surfaceBox.TabIndex = 5;
+            surfaceBox.SelectionChangeCommitted += SurfaceBox_SelectionChangeCommitted;
             // 
             // materialLabel
             // 
@@ -137,7 +135,8 @@
             rushBox.MaxDropDownItems = 5;
             rushBox.Name = "rushBox";
             rushBox.Size = new Size(108, 23);
-            rushBox.TabIndex = 10;
+            rushBox.TabIndex = 6;
+            rushBox.SelectionChangeCommitted += RushBox_SelectionChangeCommitted;
             // 
             // rushOrderLabel
             // 
@@ -149,77 +148,19 @@
             rushOrderLabel.TabIndex = 11;
             rushOrderLabel.Text = "Rush Order?";
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(63, 212);
-            label1.Name = "label1";
-            label1.Size = new Size(34, 15);
-            label1.TabIndex = 12;
-            label1.Text = "$0.00";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(10, 212);
-            label2.Name = "label2";
-            label2.Size = new Size(37, 15);
-            label2.TabIndex = 13;
-            label2.Text = "Total:";
-            // 
-            // numDrawersErrorText
-            // 
-            numDrawersErrorText.AutoSize = true;
-            numDrawersErrorText.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            numDrawersErrorText.ForeColor = Color.Crimson;
-            numDrawersErrorText.Location = new Point(219, 115);
-            numDrawersErrorText.Name = "numDrawersErrorText";
-            numDrawersErrorText.Size = new Size(76, 17);
-            numDrawersErrorText.TabIndex = 16;
-            numDrawersErrorText.Text = "Must be 7 or less";
-            numDrawersErrorText.UseCompatibleTextRendering = true;
-            numDrawersErrorText.Visible = false;
-            // 
-            // materialErrorText
-            // 
-            materialErrorText.AutoSize = true;
-            materialErrorText.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            materialErrorText.ForeColor = Color.Crimson;
-            materialErrorText.Location = new Point(263, 145);
-            materialErrorText.Name = "materialErrorText";
-            materialErrorText.Size = new Size(48, 17);
-            materialErrorText.TabIndex = 17;
-            materialErrorText.Text = "Select one";
-            materialErrorText.UseCompatibleTextRendering = true;
-            materialErrorText.Visible = false;
-            // 
-            // rushOrderErrorText
-            // 
-            rushOrderErrorText.AutoSize = true;
-            rushOrderErrorText.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            rushOrderErrorText.ForeColor = Color.Crimson;
-            rushOrderErrorText.Location = new Point(263, 171);
-            rushOrderErrorText.Name = "rushOrderErrorText";
-            rushOrderErrorText.Size = new Size(48, 17);
-            rushOrderErrorText.TabIndex = 18;
-            rushOrderErrorText.Text = "Select one";
-            rushOrderErrorText.UseCompatibleTextRendering = true;
-            rushOrderErrorText.Visible = false;
-            // 
             // confirmButton
             // 
             confirmButton.Location = new Point(287, 204);
             confirmButton.Name = "confirmButton";
             confirmButton.Size = new Size(75, 23);
-            confirmButton.TabIndex = 19;
+            confirmButton.TabIndex = 7;
             confirmButton.Text = "Submit";
             confirmButton.UseVisualStyleBackColor = true;
-            confirmButton.Click += confirmButton_Click;
+            confirmButton.Click += ConfirmButton_Click;
             // 
-            // errorProvider1
+            // errorProvider
             // 
-            errorProvider1.ContainerControl = this;
+            errorProvider.ContainerControl = this;
             // 
             // depthInput
             // 
@@ -228,11 +169,11 @@
             depthInput.MinimumSize = new Size(64, 23);
             depthInput.Name = "depthInput";
             depthInput.Size = new Size(64, 23);
-            depthInput.TabIndex = 20;
+            depthInput.TabIndex = 3;
             depthInput.Text = "0";
-            depthInput.KeyDown += depthInput_KeyDown;
-            depthInput.KeyPress += depthInput_KeyPress;
-            depthInput.KeyUp += depthInput_KeyUp;
+            depthInput.KeyDown += DepthInput_KeyDown;
+            depthInput.KeyPress += DepthInput_KeyPress;
+            depthInput.KeyUp += DepthInput_KeyUp;
             // 
             // widthInput
             // 
@@ -240,11 +181,11 @@
             widthInput.MaxLength = 4;
             widthInput.Name = "widthInput";
             widthInput.Size = new Size(64, 23);
-            widthInput.TabIndex = 21;
+            widthInput.TabIndex = 2;
             widthInput.Text = "0";
-            widthInput.TextChanged += widthInput_TextChanged;
-            widthInput.Validating += widthInput_Validating;
-            widthInput.Validated += widthInput_Validated;
+            widthInput.TextChanged += WidthInput_TextChanged;
+            widthInput.Validating += WidthInput_Validating;
+            widthInput.Validated += WidthInput_Validated;
             // 
             // AddQuote
             // 
@@ -254,11 +195,6 @@
             Controls.Add(widthInput);
             Controls.Add(depthInput);
             Controls.Add(confirmButton);
-            Controls.Add(rushOrderErrorText);
-            Controls.Add(materialErrorText);
-            Controls.Add(numDrawersErrorText);
-            Controls.Add(label2);
-            Controls.Add(label1);
             Controls.Add(rushOrderLabel);
             Controls.Add(rushBox);
             Controls.Add(materialLabel);
@@ -272,7 +208,7 @@
             Name = "AddQuote";
             Text = "Add Quote";
             ((System.ComponentModel.ISupportInitialize)drawerUpDown).EndInit();
-            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -288,13 +224,8 @@
         private Label materialLabel;
         private ComboBox rushBox;
         private Label rushOrderLabel;
-        private Label label1;
-        private Label label2;
-        private Label numDrawersErrorText;
-        private Label materialErrorText;
-        private Label rushOrderErrorText;
         private Button confirmButton;
-        private ErrorProvider errorProvider1;
+        private ErrorProvider errorProvider;
         private TextBox depthInput;
         private TextBox widthInput;
     }

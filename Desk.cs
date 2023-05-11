@@ -17,14 +17,24 @@ namespace MegaDesk_Cole
     }
     public class Desk
     {
-        public int width { get; set; }
-        public int depth { get; set; }
-        public int numDrawers { get; set; }
-        public DesktopMaterial deskMaterial { get; set; }
+        public int Width { get; set; }
+        public int Depth { get; set; }
+        public int NumDrawers { get; set; }
+        public DesktopMaterial DeskMaterial { get; set; }
 
         public const int deskWidthMax = 96;
         public const int deskWidthMin = 24;
         public const int deskDepthMax = 48;
         public const int deskDepthMin = 12;
+        public const int maxDrawers = 7;
+        public const int minDrawers = 0;
+
+        public Desk()
+        {
+            Width = 0;
+            Depth = 0;
+            NumDrawers = 0;
+            DeskMaterial = DesktopMaterial.Pine;
+        }
     }
 }

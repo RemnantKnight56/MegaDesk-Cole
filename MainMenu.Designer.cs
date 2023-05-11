@@ -42,7 +42,7 @@
             addNewQuoteButton.TabIndex = 0;
             addNewQuoteButton.Text = "Add New Quote";
             addNewQuoteButton.UseVisualStyleBackColor = true;
-            addNewQuoteButton.MouseClick += addNewQuoteButton_MouseClick;
+            addNewQuoteButton.MouseClick += AddNewQuoteButton_MouseClick;
             // 
             // viewQuoteButton
             // 
@@ -52,7 +52,7 @@
             viewQuoteButton.TabIndex = 1;
             viewQuoteButton.Text = "View Quotes";
             viewQuoteButton.UseVisualStyleBackColor = true;
-            viewQuoteButton.MouseClick += viewQuoteButton_MouseClick;
+            viewQuoteButton.MouseClick += ViewQuoteButton_MouseClick;
             // 
             // searchQuoteButton
             // 
@@ -62,7 +62,7 @@
             searchQuoteButton.TabIndex = 2;
             searchQuoteButton.Text = "Search Quotes";
             searchQuoteButton.UseVisualStyleBackColor = true;
-            searchQuoteButton.Click += searchQuoteButton_Click;
+            searchQuoteButton.Click += SearchQuoteButton_Click;
             // 
             // exitButton
             // 
@@ -72,7 +72,7 @@
             exitButton.TabIndex = 3;
             exitButton.Text = "Exit";
             exitButton.UseVisualStyleBackColor = true;
-            exitButton.Click += exitButton_Click;
+            exitButton.Click += ExitButton_Click;
             // 
             // MainMenu
             // 

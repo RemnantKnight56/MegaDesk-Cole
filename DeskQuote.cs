@@ -7,7 +7,6 @@ using System.Transactions;
 
 namespace MegaDesk_Cole
 {
-
     public enum RushOrder
     {
         None,
@@ -16,90 +15,95 @@ namespace MegaDesk_Cole
         Seven_Days,
     }
 
-    public struct Quote
+    public class DeskQuote
     {
         public String customerName;
         public Desk deskOrdered;
         public RushOrder rushDays;
-    }
+        public DateTime dateOrdered;
+        public const string basePrice = "200";
 
-    public class DeskQuote
-    {
-
-
-        public int findDeskPrice(Desk desk) 
+        public DeskQuote()
         {
-            int deskPrice = 200;
-            deskPrice += desk.width * desk.depth;
-            deskPrice += 50 * desk.numDrawers;
-            switch (desk.deskMaterial)
-            {
-                case DesktopMaterial.Pine:
-                    deskPrice += 50;
-                    break;
-
-                case DesktopMaterial.Laminate:
-                    deskPrice += 100;
-                    break;
-
-                case DesktopMaterial.Veneer:
-                    deskPrice += 125;
-                    break;
-
-                case DesktopMaterial.Oak:
-                    deskPrice += 200;
-                    break;
-
-                case DesktopMaterial.Rosewood:
-                    deskPrice += 300;
-                    break;
-            }
-            return deskPrice;
+            customerName = "";
+            deskOrdered = new Desk();
+            rushDays = RushOrder.None;
+            dateOrdered = DateTime.Now;
         }
 
-        public int findOrderPrice(Desk desk, RushOrder rushDays)
+        public string FindAreaPrice()
         {
-            int orderPrice = 0;
-            int deskArea = desk.width * desk.depth;
+            int deskArea = deskOrdered.Width * deskOrdered.Depth;
+            if (deskArea > 1000)
+            {
+                return (deskArea - 1000).ToString();
+            }
+            else
+            {
+                return "0";
+            }
+        }
+
+        public string FindDrawerPrice()
+        {
+            return (50 * deskOrdered.NumDrawers).ToString();
+        }
+
+        public string FindMaterialPrice() 
+        {
+            return deskOrdered.DeskMaterial switch
+            {
+                DesktopMaterial.Pine => "50",
+                DesktopMaterial.Laminate => "100",
+                DesktopMaterial.Veneer => "125",
+                DesktopMaterial.Oak => "200",
+                DesktopMaterial.Rosewood => "300",
+                _ => "0",
+            };
+        }
+
+        public string FindRushPrice()
+        {
+            int deskArea = deskOrdered.Width * deskOrdered.Depth;
+
 
             switch (rushDays)
             {
                 case RushOrder.Three_Days:
                     if (deskArea < 1000)
-                        orderPrice += 60;
+                        return "60";
                     else if (deskArea > 2000)
-                        orderPrice += 80;
+                        return "80";
                     else
-                        orderPrice += 70;
-                    break;
+                        return "70";
 
                 case RushOrder.Five_Days:
                     if (deskArea < 1000)
-                        orderPrice += 40;
+                        return "40";
                     else if (deskArea > 2000)
-                        orderPrice += 60;
+                        return "60";
                     else
-                        orderPrice += 50;
-                    break;
+                        return "50";
 
                 case RushOrder.Seven_Days:
                     if (deskArea < 1000)
-                        orderPrice += 30;
+                        return "30";
                     else if (deskArea > 2000)
-                        orderPrice += 40;
+                        return "40";
                     else
-                        orderPrice += 35;
-                    break;
+                        return "35";
             }
-            return orderPrice;
+            return "0";
         }
 
-        public int findTotalPrice (Desk desk, RushOrder rushDays)
+        public string FindTotalPrice ()
         {
-            int totalPrice = 0;
-            totalPrice += findDeskPrice(desk);
-            totalPrice += findOrderPrice(desk, rushDays);
-            return totalPrice;
+            int totalPrice = Convert.ToInt32(basePrice);
+            totalPrice += Convert.ToInt32(FindAreaPrice());
+            totalPrice += Convert.ToInt32(FindDrawerPrice());
+            totalPrice += Convert.ToInt32(FindMaterialPrice());
+            totalPrice += Convert.ToInt32(FindRushPrice());
+            return totalPrice.ToString();
         }
     }
 }
