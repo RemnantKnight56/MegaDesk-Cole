@@ -2,12 +2,14 @@ namespace MegaDesk_Cole
 {
     public partial class MainMenu : Form
     {
-        public int quoteCounter = 0;
-        public DeskQuote[] quotesList = new DeskQuote[50];
+        public int quoteCounter;
+        public DeskQuote[] quotesList;
 
         public MainMenu()
         {
             InitializeComponent();
+            quoteCounter = 0;
+            quotesList = new DeskQuote[50];
         }
 
         private void AddNewQuoteButton_MouseClick(object sender, MouseEventArgs e)
@@ -22,14 +24,22 @@ namespace MegaDesk_Cole
 
         private void ViewQuoteButton_MouseClick(object sender, MouseEventArgs e)
         {
-            ViewAllQuotes vq = new();
-            vq.Show();
+            ViewAllQuotes vq = new(quotesList, quoteCounter)
+            {
+                Tag = this
+            };
+            vq.Show(this);
+            this.Hide();
         }
 
         private void SearchQuoteButton_Click(object sender, EventArgs e)
         {
-            SearchQuotes sq = new();
+            SearchQuotes sq = new(quotesList, quoteCounter)
+            {
+                Tag = this
+            };
             sq.Show();
+            this.Hide();
         }
 
         private void ExitButton_Click(object sender, EventArgs e)

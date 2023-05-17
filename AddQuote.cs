@@ -14,17 +14,57 @@ namespace MegaDesk_Cole
 {
     public partial class AddQuote : Form
     {
-        readonly DeskQuote currentDesk = new();
-        bool nonNumberEntered = false;
+        readonly DeskQuote currentDesk;
+        bool nonNumberEntered;
 
         public AddQuote()
         {
             InitializeComponent();
+            currentDesk = new();
+            nonNumberEntered = false;
+
             errorProvider.SetError(nameInput, "Enter a name");
             errorProvider.SetError(widthInput, "Enter a width");
             errorProvider.SetError(depthInput, "Enter a depth");
             errorProvider.SetError(surfaceBox, "Select a surface");
             errorProvider.SetError(rushBox, "Select a rush order type");
+        }
+
+        public AddQuote(DeskQuote oldQuote)
+        {
+            InitializeComponent();
+            currentDesk = oldQuote;
+            nonNumberEntered = false;
+
+            if (currentDesk.customerName == "")
+                errorProvider.SetError(nameInput, "Enter a name");
+            else
+                nameInput.Text = currentDesk.customerName;
+
+            if (currentDesk.deskOrdered.Width < Desk.deskWidthMin || currentDesk.deskOrdered.Width > Desk.deskWidthMax)
+                errorProvider.SetError(widthInput, "Enter a width");
+            else
+                widthInput.Text = currentDesk.deskOrdered.Width.ToString();
+
+            if (currentDesk.deskOrdered.Depth < Desk.deskDepthMin || currentDesk.deskOrdered.Depth > Desk.deskDepthMax)
+                errorProvider.SetError(depthInput, "Enter a depth");
+            else
+                depthInput.Text = currentDesk.deskOrdered.Depth.ToString();
+
+            if(currentDesk.deskOrdered.DeskMaterial == DesktopMaterial.Not_Selected)
+                errorProvider.SetError(surfaceBox, "Select a surface");
+            else
+                surfaceBox.SelectedIndex = (int)currentDesk.deskOrdered.DeskMaterial;
+
+            if(currentDesk.deskOrdered.NumDrawers > Desk.maxDrawers || currentDesk.deskOrdered.NumDrawers < Desk.minDrawers)
+                errorProvider.SetError(drawerUpDown, "Must be between " + Desk.minDrawers + " and " + Desk.maxDrawers);
+            else
+                drawerUpDown.Value = currentDesk.deskOrdered.NumDrawers;
+
+            if(currentDesk.rushDays == RushOrder.Not_Selected)
+                errorProvider.SetError(rushBox, "Select a rush order type");
+            else
+                rushBox.SelectedIndex = (int)currentDesk.rushDays;
         }
 
         private void ConfirmButton_Click(object sender, EventArgs e)
@@ -38,6 +78,7 @@ namespace MegaDesk_Cole
             {
                 MainMenu viewMainMenu = (MainMenu)Tag;
                 viewMainMenu.quotesList[viewMainMenu.quoteCounter] = currentDesk;
+                viewMainMenu.quoteCounter++;
                 viewMainMenu.Show();
 
                 DisplayQuote displayMenu = new(currentDesk);
@@ -48,7 +89,6 @@ namespace MegaDesk_Cole
             {
                 MessageBox.Show("Resolve all errors before continuing.");
             }
-
         }
 
         private void DepthInput_KeyDown(object sender, KeyEventArgs e)

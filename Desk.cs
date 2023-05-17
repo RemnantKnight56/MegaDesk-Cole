@@ -13,7 +13,8 @@ namespace MegaDesk_Cole
         Laminate,
         Veneer,
         Oak,
-        Rosewood
+        Rosewood,
+        Not_Selected
     }
     public class Desk
     {
@@ -34,7 +35,7 @@ namespace MegaDesk_Cole
             Width = 0;
             Depth = 0;
             NumDrawers = 0;
-            DeskMaterial = DesktopMaterial.Pine;
+            DeskMaterial = DesktopMaterial.Not_Selected;
         }
     }
 }

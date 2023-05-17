@@ -13,6 +13,7 @@ namespace MegaDesk_Cole
         Three_Days,
         Five_Days,
         Seven_Days,
+        Not_Selected
     }
 
     public class DeskQuote
@@ -22,13 +23,15 @@ namespace MegaDesk_Cole
         public RushOrder rushDays;
         public DateTime dateOrdered;
         public const string basePrice = "200";
+        public int total;
 
         public DeskQuote()
         {
             customerName = "";
             deskOrdered = new Desk();
-            rushDays = RushOrder.None;
+            rushDays = RushOrder.Not_Selected;
             dateOrdered = DateTime.Now;
+            total = 0;
         }
 
         public string FindAreaPrice()
@@ -103,6 +106,7 @@ namespace MegaDesk_Cole
             totalPrice += Convert.ToInt32(FindDrawerPrice());
             totalPrice += Convert.ToInt32(FindMaterialPrice());
             totalPrice += Convert.ToInt32(FindRushPrice());
+            total = totalPrice;
             return totalPrice.ToString();
         }
     }

@@ -26,7 +26,7 @@ namespace MegaDesk_Cole
             drawersBox.Text = deskQuote.deskOrdered.NumDrawers.ToString();
             materialBox.Text = deskQuote.deskOrdered.DeskMaterial.ToString();
 
-            switch (deskQuote.rushDays) 
+            switch (deskQuote.rushDays)
             {
                 case RushOrder.Three_Days:
                     rushBox.Text = "3 Days";
@@ -39,7 +39,10 @@ namespace MegaDesk_Cole
                 case RushOrder.Seven_Days:
                     rushBox.Text = "7 Days";
                     break;
-
+                case RushOrder.None:
+                    break;
+                case RushOrder.Not_Selected:
+                    break;
                 default:
                     rushBox.Text = "N/A";
                     break;
