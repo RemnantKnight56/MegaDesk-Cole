@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using System.IO;
 
 namespace MegaDesk_Cole
 {
@@ -32,6 +33,45 @@ namespace MegaDesk_Cole
             rushDays = RushOrder.Not_Selected;
             dateOrdered = DateTime.Now;
             total = 0;
+        }
+
+        public static int[,] GetRushOrder()
+        {
+            int[,] rushOrderPrices = new int[3, 3];
+            try
+            {
+                string filename = Path.GetDirectoryName(Application.ExecutablePath);
+                filename += @"\rushOrderPrices.txt";
+                StreamReader reader;
+                reader = new StreamReader(filename);
+
+                int x = 0; 
+                int y = 0;
+
+                while (reader.EndOfStream == false)
+                {
+                    rushOrderPrices[y, x] = Convert.ToInt32(reader.ReadLine());
+                    x++;
+                    if (x > 2)
+                    {
+                        x = 0;
+                        y++;
+                    }
+                    
+                    if(y > 2)
+                    {
+                        break;
+                    }
+                }
+
+                reader.Close();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("An error has ocurred!");
+            }
+
+            return rushOrderPrices;
         }
 
         public string FindAreaPrice()
@@ -69,32 +109,33 @@ namespace MegaDesk_Cole
         {
             int deskArea = deskOrdered.Width * deskOrdered.Depth;
 
+            int[,] rushOrderPrices = GetRushOrder();
 
             switch (rushDays)
             {
                 case RushOrder.Three_Days:
                     if (deskArea < 1000)
-                        return "60";
+                        return rushOrderPrices[0, 0].ToString();
                     else if (deskArea > 2000)
-                        return "80";
+                        return rushOrderPrices[0, 2].ToString();
                     else
-                        return "70";
+                        return rushOrderPrices[0, 1].ToString();
 
                 case RushOrder.Five_Days:
                     if (deskArea < 1000)
-                        return "40";
+                        return rushOrderPrices[1, 0].ToString();
                     else if (deskArea > 2000)
-                        return "60";
+                        return rushOrderPrices[1, 2].ToString();
                     else
-                        return "50";
+                        return rushOrderPrices[1, 1].ToString();
 
                 case RushOrder.Seven_Days:
                     if (deskArea < 1000)
-                        return "30";
+                        return rushOrderPrices[2, 0].ToString();
                     else if (deskArea > 2000)
-                        return "40";
+                        return rushOrderPrices[2, 2].ToString();
                     else
-                        return "35";
+                        return rushOrderPrices[2, 1].ToString();
             }
             return "0";
         }
