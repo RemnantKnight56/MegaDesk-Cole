@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            comboBox1 = new ComboBox();
+            searchBox = new ComboBox();
             label1 = new Label();
             NameColumn = new DataGridViewTextBoxColumn();
             DateColumn = new DataGridViewTextBoxColumn();
@@ -52,13 +52,14 @@
             ((System.ComponentModel.ISupportInitialize)dataGrid).BeginInit();
             SuspendLayout();
             // 
-            // comboBox1
+            // searchBox
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(170, 17);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 0;
+            searchBox.FormattingEnabled = true;
+            searchBox.Location = new Point(170, 17);
+            searchBox.Name = "searchBox";
+            searchBox.Size = new Size(121, 23);
+            searchBox.TabIndex = 0;
+            searchBox.SelectedIndexChanged += SearchBox_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -165,7 +166,7 @@
             exitButton.TabIndex = 3;
             exitButton.Text = "Exit";
             exitButton.UseVisualStyleBackColor = true;
-            exitButton.Click += exitButton_Click;
+            exitButton.Click += ExitButton_Click;
             // 
             // SearchQuotes
             // 
@@ -175,7 +176,7 @@
             Controls.Add(exitButton);
             Controls.Add(dataGrid);
             Controls.Add(label1);
-            Controls.Add(comboBox1);
+            Controls.Add(searchBox);
             Name = "SearchQuotes";
             Text = "Search Quotes";
             ((System.ComponentModel.ISupportInitialize)deskQuoteBindingSource).EndInit();
@@ -186,7 +187,7 @@
 
         #endregion
 
-        private ComboBox comboBox1;
+        private ComboBox searchBox;
         private Label label1;
         private DataGridViewTextBoxColumn NameColumn;
         private DataGridViewTextBoxColumn DateColumn;

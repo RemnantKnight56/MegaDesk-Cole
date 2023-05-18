@@ -28,7 +28,8 @@ namespace MegaDesk_Cole
                 DataGridViewRow row = dataGrid.Rows[rowID];
 
                 row.Cells["namesColumn"].Value = item.customerName;
-                row.Cells["pricesColumn"].Value = item.dateOrdered.Date;
+                row.Cells["pricesColumn"].Value = item.total;
+                row.Cells["datesColumn"].Value = item.dateOrdered.Date;
                 row.Cells["widthsColumn"].Value = item.deskOrdered.Width;
                 row.Cells["depthsColumn"].Value = item.deskOrdered.Depth;
                 row.Cells["drawerColumn"].Value = item.deskOrdered.NumDrawers;

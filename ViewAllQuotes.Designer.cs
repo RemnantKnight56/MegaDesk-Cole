@@ -45,9 +45,7 @@
             PriceColumn = new DataGridViewTextBoxColumn();
             DateColumn = new DataGridViewTextBoxColumn();
             NameColumn = new DataGridViewTextBoxColumn();
-            label1 = new Label();
             deskQuoteBindingSource = new BindingSource(components);
-            comboBox1 = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)deskQuoteBindingSource).BeginInit();
             SuspendLayout();
@@ -145,27 +143,9 @@
             NameColumn.HeaderText = "Name";
             NameColumn.Name = "NameColumn";
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(12, 12);
-            label1.Name = "label1";
-            label1.Size = new Size(111, 15);
-            label1.TabIndex = 5;
-            label1.Text = "Search By Material";
-            // 
             // deskQuoteBindingSource
             // 
             deskQuoteBindingSource.DataSource = typeof(DeskQuote);
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(170, 9);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 4;
             // 
             // ViewAllQuotes
             // 
@@ -174,14 +154,11 @@
             ClientSize = new Size(867, 363);
             Controls.Add(exitButton);
             Controls.Add(dataGrid);
-            Controls.Add(label1);
-            Controls.Add(comboBox1);
             Name = "ViewAllQuotes";
             Text = "View All Quotes";
             ((System.ComponentModel.ISupportInitialize)dataGrid).EndInit();
             ((System.ComponentModel.ISupportInitialize)deskQuoteBindingSource).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -202,8 +179,6 @@
         private DataGridViewTextBoxColumn PriceColumn;
         private DataGridViewTextBoxColumn DateColumn;
         private DataGridViewTextBoxColumn NameColumn;
-        private Label label1;
         private BindingSource deskQuoteBindingSource;
-        private ComboBox comboBox1;
     }
 }
