@@ -1,3 +1,5 @@
+using System.IO;
+
 namespace MegaDesk_Cole
 {
     public partial class MainMenu : Form
@@ -44,12 +46,19 @@ namespace MegaDesk_Cole
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
+            Tools SaveData = new Tools();
+            SaveData.SaveFile(quotesList);
             Application.Exit();
         }
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
+            Tools LoadData = new Tools();
+            if (File.Exists(LoadData.getDir()))
+            {
+                Array.Copy(LoadData.LoadFile(), quotesList, LoadData.LoadFile().Length);
 
+            }
         }
     }
 }

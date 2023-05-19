@@ -23,6 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="rushOrderPrices.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
