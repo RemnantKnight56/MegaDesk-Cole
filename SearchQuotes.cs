@@ -21,17 +21,15 @@ namespace MegaDesk_Cole
             searchBox.SelectedIndex = 5;
         }
 
-        public SearchQuotes(DeskQuote[] deskQuotes, int counter)
+        public SearchQuotes(List<DeskQuote> deskQuotes)
         {
             InitializeComponent();
             List<DesktopMaterial> materials = Enum.GetValues<DesktopMaterial>().ToList<DesktopMaterial>();
             searchBox.DataSource = materials;
             searchBox.SelectedIndex = 5;
 
-            for (int i = 0; i < counter; i++)
+            foreach (DeskQuote item in deskQuotes)
             {
-                DeskQuote item = deskQuotes[i];
-
                 int rowID = dataGrid.Rows.Add();
                 DataGridViewRow row = dataGrid.Rows[rowID];
 
@@ -75,6 +73,10 @@ namespace MegaDesk_Cole
                 if ((string)row.Cells["materialsColumn"].Value == searchBox.Text)
                 {
                     row.Visible = true;
+                }
+                else
+                {
+                    row.Visible = false;
                 }
             }
         }

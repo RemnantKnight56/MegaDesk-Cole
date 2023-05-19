@@ -108,10 +108,12 @@
             dataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGrid.Columns.AddRange(new DataGridViewColumn[] { namesColumn, datesColumn, pricesColumn, widthsColumn, depthsColumn, drawerColumn, rushDaysColumn, materialsColumn });
             dataGrid.Location = new Point(12, 47);
+            dataGrid.MultiSelect = false;
             dataGrid.Name = "dataGrid";
             dataGrid.RowTemplate.Height = 25;
             dataGrid.Size = new Size(848, 279);
             dataGrid.TabIndex = 6;
+            dataGrid.CellDoubleClick += dataGrid_CellDoubleClick;
             // 
             // DrawersColumn
             // 

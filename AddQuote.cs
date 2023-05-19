@@ -77,8 +77,7 @@ namespace MegaDesk_Cole
                 errorProvider.GetError(drawerUpDown) == "")
             {
                 MainMenu viewMainMenu = (MainMenu)Tag;
-                viewMainMenu.quotesList[viewMainMenu.quoteCounter] = currentDesk;
-                viewMainMenu.quoteCounter++;
+                viewMainMenu.quotesList.Add(currentDesk);
                 viewMainMenu.Show();
 
                 DisplayQuote displayMenu = new(currentDesk);
@@ -131,7 +130,6 @@ namespace MegaDesk_Cole
             {
                 errorProvider.SetError(depthInput, "Depth must be set between " + Desk.deskDepthMin +
                     " and " + Desk.deskDepthMax);
-                //depthInput.Select(0, depthInput.Text.Length);
             }
             else
             {

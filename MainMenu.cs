@@ -4,15 +4,9 @@ namespace MegaDesk_Cole
 {
     public partial class MainMenu : Form
     {
-        public int quoteCounter;
-        public DeskQuote[] quotesList;
+        public List<DeskQuote> quotesList;
 
-        public MainMenu()
-        {
-            InitializeComponent();
-            quoteCounter = 0;
-            quotesList = new DeskQuote[50];
-        }
+        public MainMenu() => InitializeComponent();
 
         private void AddNewQuoteButton_MouseClick(object sender, MouseEventArgs e)
         {
@@ -26,7 +20,7 @@ namespace MegaDesk_Cole
 
         private void ViewQuoteButton_MouseClick(object sender, MouseEventArgs e)
         {
-            ViewAllQuotes vq = new(quotesList, quoteCounter)
+            ViewAllQuotes vq = new(quotesList)
             {
                 Tag = this
             };
@@ -36,7 +30,7 @@ namespace MegaDesk_Cole
 
         private void SearchQuoteButton_Click(object sender, EventArgs e)
         {
-            SearchQuotes sq = new(quotesList, quoteCounter)
+            SearchQuotes sq = new(quotesList)
             {
                 Tag = this
             };
@@ -56,9 +50,16 @@ namespace MegaDesk_Cole
             Tools LoadData = new Tools();
             if (File.Exists(LoadData.getDir()))
             {
-                Array.Copy(LoadData.LoadFile(), quotesList, LoadData.LoadFile().Length);
+                quotesList = LoadData.LoadFile();
 
             }
+        }
+
+        private void MainMenu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Tools SaveData = new Tools();
+            SaveData.SaveFile(quotesList);
+            Application.Exit();
         }
     }
 }

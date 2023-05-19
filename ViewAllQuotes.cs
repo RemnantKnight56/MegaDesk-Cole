@@ -17,12 +17,11 @@ namespace MegaDesk_Cole
             InitializeComponent();
         }
 
-        public ViewAllQuotes(DeskQuote[] deskQuotes, int counter)
+        public ViewAllQuotes(List<DeskQuote> deskQuotes)
         {
             InitializeComponent();
-            for (int i = 0; i < counter; i++)
+            foreach (DeskQuote item in deskQuotes)
             {
-                DeskQuote item = deskQuotes[i];
 
                 int rowID = dataGrid.Rows.Add();
                 DataGridViewRow row = dataGrid.Rows[rowID];
@@ -43,6 +42,14 @@ namespace MegaDesk_Cole
             MainMenu viewMainMenu = (MainMenu)Tag;
             viewMainMenu.Show();
             Close();
+        }
+
+        private void dataGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //MainMenu viewMainMenu = (MainMenu)Tag;
+            
+            //DisplayQuote displayMenu = new(viewMainMenu.quotesList[dataGrid.SelectedRows[0].Index]);
+            //displayMenu.Show();
         }
     }
 }
