@@ -13,11 +13,11 @@ namespace MegaDesk_Cole
     internal class Tools 
     {   List<DeskQuote> deskQuoteList = new List<DeskQuote>();
         private string dirPath = "C:\\MegaDesk\\MegaDeskDataSource.json";
-        private string GenerateJson(DeskQuote[] deskQ)
+        private string GenerateJson(List<DeskQuote> deskQ)
         {
             return JsonConvert.SerializeObject(deskQ.Where(c => c != null));
         }
-        public void SaveFile(DeskQuote[] deskQ)
+        public void SaveFile(List<DeskQuote> deskQ)
         {
             FileStream fParameter = new FileStream(dirPath, FileMode.Create, FileAccess.Write);
             StreamWriter m_WriterParameter = new StreamWriter(fParameter);
@@ -27,12 +27,12 @@ namespace MegaDesk_Cole
             m_WriterParameter.Close();
         }
 
-        public DeskQuote[] LoadFile()
+        public List<DeskQuote> LoadFile()
         {  
             using StreamReader m_ReaderParameter = new(dirPath);
             var json = m_ReaderParameter.ReadToEnd();
             m_ReaderParameter.Close();
-            return JsonConvert.DeserializeObject<DeskQuote[]>(json);
+            return JsonConvert.DeserializeObject<List<DeskQuote>>(json);
 
         }
 

@@ -85,6 +85,7 @@
             Controls.Add(addNewQuoteButton);
             Name = "MainMenu";
             Text = "Main Menu";
+            FormClosing += MainMenu_FormClosing;
             Load += MainMenu_Load;
             ResumeLayout(false);
         }
