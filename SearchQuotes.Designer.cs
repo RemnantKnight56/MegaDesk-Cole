@@ -55,9 +55,10 @@
             // searchBox
             // 
             searchBox.FormattingEnabled = true;
-            searchBox.Location = new Point(170, 17);
+            searchBox.Location = new Point(200, 21);
+            searchBox.Margin = new Padding(4, 5, 4, 5);
             searchBox.Name = "searchBox";
-            searchBox.Size = new Size(121, 23);
+            searchBox.Size = new Size(171, 33);
             searchBox.TabIndex = 0;
             searchBox.SelectedIndexChanged += SearchBox_SelectedIndexChanged;
             // 
@@ -65,41 +66,54 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(12, 20);
+            label1.Location = new Point(17, 26);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(111, 15);
+            label1.Size = new Size(172, 25);
             label1.TabIndex = 1;
             label1.Text = "Search By Material";
             // 
             // NameColumn
             // 
             NameColumn.HeaderText = "Name";
+            NameColumn.MinimumWidth = 8;
             NameColumn.Name = "NameColumn";
+            NameColumn.Width = 150;
             // 
             // DateColumn
             // 
             DateColumn.HeaderText = "Date";
+            DateColumn.MinimumWidth = 8;
             DateColumn.Name = "DateColumn";
+            DateColumn.Width = 150;
             // 
             // PriceColumn
             // 
             PriceColumn.HeaderText = "Price";
+            PriceColumn.MinimumWidth = 8;
             PriceColumn.Name = "PriceColumn";
+            PriceColumn.Width = 150;
             // 
             // WidthColumn
             // 
             WidthColumn.HeaderText = "Width";
+            WidthColumn.MinimumWidth = 8;
             WidthColumn.Name = "WidthColumn";
+            WidthColumn.Width = 150;
             // 
             // DepthColumn
             // 
             DepthColumn.HeaderText = "Depth";
+            DepthColumn.MinimumWidth = 8;
             DepthColumn.Name = "DepthColumn";
+            DepthColumn.Width = 150;
             // 
             // DrawersColumn
             // 
             DrawersColumn.HeaderText = "Drawers";
+            DrawersColumn.MinimumWidth = 8;
             DrawersColumn.Name = "DrawersColumn";
+            DrawersColumn.Width = 150;
             // 
             // deskQuoteBindingSource
             // 
@@ -112,57 +126,77 @@
             dataGrid.AllowUserToOrderColumns = true;
             dataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGrid.Columns.AddRange(new DataGridViewColumn[] { namesColumn, datesColumn, pricesColumn, widthsColumn, depthsColumn, drawerColumn, rushDaysColumn, materialsColumn });
-            dataGrid.Location = new Point(12, 63);
+            dataGrid.Location = new Point(17, 71);
+            dataGrid.Margin = new Padding(4, 5, 4, 5);
             dataGrid.Name = "dataGrid";
+            dataGrid.RowHeadersWidth = 62;
             dataGrid.RowTemplate.Height = 25;
-            dataGrid.Size = new Size(848, 279);
+            dataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGrid.Size = new Size(1211, 571);
             dataGrid.TabIndex = 2;
             // 
             // namesColumn
             // 
             namesColumn.HeaderText = "Name";
+            namesColumn.MinimumWidth = 8;
             namesColumn.Name = "namesColumn";
+            namesColumn.Width = 150;
             // 
             // datesColumn
             // 
             datesColumn.HeaderText = "Date";
+            datesColumn.MinimumWidth = 8;
             datesColumn.Name = "datesColumn";
+            datesColumn.Width = 150;
             // 
             // pricesColumn
             // 
             pricesColumn.HeaderText = "Price";
+            pricesColumn.MinimumWidth = 8;
             pricesColumn.Name = "pricesColumn";
+            pricesColumn.Width = 150;
             // 
             // widthsColumn
             // 
             widthsColumn.HeaderText = "Width";
+            widthsColumn.MinimumWidth = 8;
             widthsColumn.Name = "widthsColumn";
+            widthsColumn.Width = 150;
             // 
             // depthsColumn
             // 
             depthsColumn.HeaderText = "Depth";
+            depthsColumn.MinimumWidth = 8;
             depthsColumn.Name = "depthsColumn";
+            depthsColumn.Width = 150;
             // 
             // drawerColumn
             // 
             drawerColumn.HeaderText = "Drawers";
+            drawerColumn.MinimumWidth = 8;
             drawerColumn.Name = "drawerColumn";
+            drawerColumn.Width = 150;
             // 
             // rushDaysColumn
             // 
             rushDaysColumn.HeaderText = "Rush Order?";
+            rushDaysColumn.MinimumWidth = 8;
             rushDaysColumn.Name = "rushDaysColumn";
+            rushDaysColumn.Width = 150;
             // 
             // materialsColumn
             // 
             materialsColumn.HeaderText = "Material";
+            materialsColumn.MinimumWidth = 8;
             materialsColumn.Name = "materialsColumn";
+            materialsColumn.Width = 150;
             // 
             // exitButton
             // 
-            exitButton.Location = new Point(766, 366);
+            exitButton.Location = new Point(1121, 21);
+            exitButton.Margin = new Padding(4, 5, 4, 5);
             exitButton.Name = "exitButton";
-            exitButton.Size = new Size(75, 23);
+            exitButton.Size = new Size(107, 38);
             exitButton.TabIndex = 3;
             exitButton.Text = "Exit";
             exitButton.UseVisualStyleBackColor = true;
@@ -170,15 +204,20 @@
             // 
             // SearchQuotes
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(872, 401);
+            ClientSize = new Size(1246, 668);
             Controls.Add(exitButton);
             Controls.Add(dataGrid);
             Controls.Add(label1);
             Controls.Add(searchBox);
+            Margin = new Padding(4, 5, 4, 5);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "SearchQuotes";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Search Quotes";
+            FormClosed += SearchQuotes_FormClosed;
             ((System.ComponentModel.ISupportInitialize)deskQuoteBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGrid).EndInit();
             ResumeLayout(false);

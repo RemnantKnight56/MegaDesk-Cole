@@ -10,16 +10,24 @@ using Newtonsoft.Json;
 
 namespace MegaDesk_Cole
 {
-    internal class Tools 
-    {   List<DeskQuote> deskQuoteList = new List<DeskQuote>();
-        private string dirPath = "C:\\MegaDesk\\MegaDeskDataSource.json";
+    internal class Tools
+    {
+
+        public Tools(){
+            if (File.Exists(getDir())){
+                fileExist = true;
+            }
+            }
+        private string dirPath = "C:\\MegaDesk\\";
+        private string fileName = "MegaDeskDataSource.json";
+        public bool fileExist = false;
         private string GenerateJson(List<DeskQuote> deskQ)
         {
             return JsonConvert.SerializeObject(deskQ.Where(c => c != null));
         }
         public void SaveFile(List<DeskQuote> deskQ)
         {
-            FileStream fParameter = new FileStream(dirPath, FileMode.Create, FileAccess.Write);
+            FileStream fParameter = new FileStream(getDir(), FileMode.Create, FileAccess.Write);
             StreamWriter m_WriterParameter = new StreamWriter(fParameter);
             m_WriterParameter.BaseStream.Seek(0, SeekOrigin.End);
             m_WriterParameter.Write(GenerateJson(deskQ));
@@ -28,17 +36,25 @@ namespace MegaDesk_Cole
         }
 
         public List<DeskQuote> LoadFile()
-        {  
-            using StreamReader m_ReaderParameter = new(dirPath);
-            var json = m_ReaderParameter.ReadToEnd();
-            m_ReaderParameter.Close();
-            return JsonConvert.DeserializeObject<List<DeskQuote>>(json);
+        {
+            if (!Directory.Exists(dirPath)){
+                Directory.CreateDirectory(dirPath);
+            }
+
+            if (File.Exists(getDir()))
+            {
+                using StreamReader m_ReaderParameter = new(getDir());
+                var json = m_ReaderParameter.ReadToEnd();
+                m_ReaderParameter.Close();
+                return JsonConvert.DeserializeObject<List<DeskQuote>>(json);
+            }
+            return null;
 
         }
 
-        public string getDir()
+        private string getDir()
         {
-            return dirPath;
+            return dirPath+fileName;
         }
 
     }

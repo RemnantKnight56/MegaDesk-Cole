@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 using static System.Convert;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -14,74 +15,30 @@ namespace MegaDesk_Cole
 {
     public partial class AddQuote : Form
     {
-        readonly DeskQuote currentDesk;
-        bool nonNumberEntered;
+        protected DeskQuote currentDesk;
 
         public AddQuote()
         {
             InitializeComponent();
-            currentDesk = new();
-            nonNumberEntered = false;
-
-            errorProvider.SetError(nameInput, "Enter a name");
-            errorProvider.SetError(widthInput, "Enter a width");
-            errorProvider.SetError(depthInput, "Enter a depth");
-            errorProvider.SetError(surfaceBox, "Select a surface");
-            errorProvider.SetError(rushBox, "Select a rush order type");
-        }
-
-        public AddQuote(DeskQuote oldQuote)
-        {
-            InitializeComponent();
-            currentDesk = oldQuote;
-            nonNumberEntered = false;
-
-            if (currentDesk.customerName == "")
-                errorProvider.SetError(nameInput, "Enter a name");
-            else
-                nameInput.Text = currentDesk.customerName;
-
-            if (currentDesk.deskOrdered.Width < Desk.deskWidthMin || currentDesk.deskOrdered.Width > Desk.deskWidthMax)
-                errorProvider.SetError(widthInput, "Enter a width");
-            else
-                widthInput.Text = currentDesk.deskOrdered.Width.ToString();
-
-            if (currentDesk.deskOrdered.Depth < Desk.deskDepthMin || currentDesk.deskOrdered.Depth > Desk.deskDepthMax)
-                errorProvider.SetError(depthInput, "Enter a depth");
-            else
-                depthInput.Text = currentDesk.deskOrdered.Depth.ToString();
-
-            if(currentDesk.deskOrdered.DeskMaterial == DesktopMaterial.Not_Selected)
-                errorProvider.SetError(surfaceBox, "Select a surface");
-            else
-                surfaceBox.SelectedIndex = (int)currentDesk.deskOrdered.DeskMaterial;
-
-            if(currentDesk.deskOrdered.NumDrawers > Desk.maxDrawers || currentDesk.deskOrdered.NumDrawers < Desk.minDrawers)
-                errorProvider.SetError(drawerUpDown, "Must be between " + Desk.minDrawers + " and " + Desk.maxDrawers);
-            else
-                drawerUpDown.Value = currentDesk.deskOrdered.NumDrawers;
-
-            if(currentDesk.rushDays == RushOrder.Not_Selected)
-                errorProvider.SetError(rushBox, "Select a rush order type");
-            else
-                rushBox.SelectedIndex = (int)currentDesk.rushDays;
         }
 
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
             if (errorProvider.GetError(depthInput) == "" &&
-                errorProvider.GetError(widthInput) == "" &&
-                errorProvider.GetError(nameInput) == "" &&
-                errorProvider.GetError(surfaceBox) == "" &&
-                errorProvider.GetError(rushBox) == "" &&
-                errorProvider.GetError(drawerUpDown) == "")
+            errorProvider.GetError(widthInput) == "" &&
+            errorProvider.GetError(nameInput) == "" &&
+            errorProvider.GetError(surfaceBox) == "" &&
+            errorProvider.GetError(rushBox) == "" &&
+            errorProvider.GetError(drawerUpDown) == "")
             {
+                currentDesk = new(Convert.ToInt32(widthInput.Text), Convert.ToInt32(depthInput.Text), Convert.ToInt32(drawerUpDown.Text), surfaceBox.Text, nameInput.Text, rushBox.Text, DateTime.Today);
+
                 MainMenu viewMainMenu = (MainMenu)Tag;
                 viewMainMenu.quotesList.Add(currentDesk);
-                viewMainMenu.Show();
 
-                DisplayQuote displayMenu = new(currentDesk);
-                displayMenu.Show();
+                DisplayQuote displayQuote = new(currentDesk);
+                displayQuote.Tag = viewMainMenu;
+                displayQuote.Show();
                 Close();
             }
             else
@@ -90,129 +47,122 @@ namespace MegaDesk_Cole
             }
         }
 
-        private void DepthInput_KeyDown(object sender, KeyEventArgs e)
+        private void nameInput_Validating(object sender, CancelEventArgs e)
         {
-            nonNumberEntered = false;
-
-            if (e.KeyCode < Keys.D0 || e.KeyCode > Keys.D9)
-            {
-                if (e.KeyCode < Keys.NumPad0 || e.KeyCode > Keys.NumPad9)
-                {
-                    if (e.KeyCode != Keys.Back)
-                    {
-                        nonNumberEntered = true;
-                    }
-                }
-            }
-
-            if (Control.ModifierKeys == Keys.Shift)
-            {
-                nonNumberEntered = true;
-            }
+            ValidateText("Name", nameInput, e);
         }
 
-        private void DepthInput_KeyPress(object sender, KeyPressEventArgs e)
+        private void depthInput_Validating(object sender, CancelEventArgs e)
         {
-            if (nonNumberEntered)
-            {
-                e.Handled = true;
-            }
+            ValidateNumber(Desk.deskDepthMin, Desk.deskDepthMax, "Depth", depthInput, e);
         }
 
-        private void DepthInput_KeyUp(object sender, KeyEventArgs e)
+        private void widthInput_Validating(object sender, CancelEventArgs e)
         {
-            if (depthInput.Text != "")
-            {
-                currentDesk.deskOrdered.Depth = ToInt32(depthInput.Text);
-            }
-
-            if ((currentDesk.deskOrdered.Depth < Desk.deskDepthMin) || (currentDesk.deskOrdered.Depth > Desk.deskDepthMax))
-            {
-                errorProvider.SetError(depthInput, "Depth must be set between " + Desk.deskDepthMin +
-                    " and " + Desk.deskDepthMax);
-            }
-            else
-            {
-                errorProvider.SetError(depthInput, "");
-                currentDesk.deskOrdered.Depth = Convert.ToInt32(depthInput.Text);
-            }
+            ValidateNumber(Desk.deskWidthMin, Desk.deskWidthMax, "Width", widthInput, e);
         }
 
-        private void WidthInput_TextChanged(object sender, EventArgs e)
+        private void drawerUpDown_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                currentDesk.deskOrdered.Width = ToInt32(widthInput.Text);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Only numbers are valid input");
-                widthInput.Text = "0";
-            }
+            ValidateNumber(0, 7, "Number of drawers", drawerUpDown, e);
         }
 
-        private void WidthInput_Validating(object sender, CancelEventArgs e)
+        private void surfaceBox_Validating(object sender, CancelEventArgs e)
         {
-            try
+            ValidateCombo("Surface Material", surfaceBox, e);
+        }
+
+        private void rushBox_Validating(object sender, CancelEventArgs e)
+        {
+            ValidateCombo("Rush Order", rushBox, e);
+        }
+
+        private void ValidateNumber(int rangeMin, int rangeMax, string fieldName, TextBox field, CancelEventArgs e)
+        {
+            int input;
+            bool isNum = Int32.TryParse(field.Text, out input);
+            if (!isNum) // if its not numeric
             {
-                currentDesk.deskOrdered.Width = ToInt32(widthInput.Text);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Only numbers are valid input");
-                widthInput.Text = "0";
-                return;
-            }
-            if ((currentDesk.deskOrdered.Width < Desk.deskWidthMin) || (currentDesk.deskOrdered.Width > Desk.deskWidthMax))
-            {
+                MessageBox.Show($"You might only use numeric characters in the field {fieldName}.", "ATTENTION", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorProvider.SetError(field, "You might only use numeric characters in this field.");
                 e.Cancel = true;
-                errorProvider.SetError(widthInput, "Width must be set between " + Desk.deskWidthMin +
-                    " and " + Desk.deskWidthMax);
-                widthInput.Select(0, widthInput.Text.Length);
+                field.Focus();
             }
-        }
-
-        private void WidthInput_Validated(object sender, EventArgs e)
-        {
-            errorProvider.SetError(widthInput, "");
-            currentDesk.deskOrdered.Width = Convert.ToInt32(widthInput.Text);
-        }
-
-        private void NameInput_TextChanged(object sender, EventArgs e)
-        {
-            if (nameInput.Text != "")
+            else if (input < rangeMin || input > rangeMax) // if the range is not met
             {
-                errorProvider.SetError(nameInput, "");
-                currentDesk.customerName = nameInput.Text;
+                errorProvider.SetError(field, $" {fieldName} must be set between " + rangeMin + " and " + rangeMax);
+                e.Cancel = true;
+                field.Focus();
             }
             else
             {
-                errorProvider.SetError(nameInput, "Enter a name");
+                errorProvider.SetError(field, null);
             }
+            e.Cancel = false;
         }
 
-        private void SurfaceBox_SelectionChangeCommitted(object sender, EventArgs e)
+        private void ValidateNumber(int rangeMin, int rangeMax, string fieldName, NumericUpDown field, CancelEventArgs e)
         {
-            currentDesk.deskOrdered.DeskMaterial = (DesktopMaterial)surfaceBox.SelectedIndex;
-            errorProvider.SetError(surfaceBox, "");
-        }
-
-        private void RushBox_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            currentDesk.rushDays = (RushOrder)rushBox.SelectedIndex;
-            errorProvider.SetError(rushBox, "");
-        }
-
-        private void DrawerUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            if(drawerUpDown.Value > Desk.maxDrawers || drawerUpDown.Value < Desk.minDrawers)
+            int input;
+            bool isNum = Int32.TryParse(field.Text, out input);
+            if (!isNum) // if its not numeric
             {
-                errorProvider.SetError(drawerUpDown, "Must be between " + Desk.minDrawers + " and " + Desk.maxDrawers);
+                MessageBox.Show($"You might only use numeric characters in the field {fieldName}.", "ATTENTION", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorProvider.SetError(field, "You might only use numeric characters in this field.");
+                e.Cancel = true;
+                field.Focus();
+            }
+            else if (input < rangeMin || input > rangeMax) // if the range is not met
+            {
+                errorProvider.SetError(field, $" {fieldName} must be set between " + rangeMin + " and " + rangeMax);
+                e.Cancel = true;
+                field.Focus();
             }
             else
             {
-                errorProvider.SetError(drawerUpDown, "");
-                currentDesk.deskOrdered.NumDrawers = Convert.ToInt32(drawerUpDown.Value);
+                errorProvider.SetError(field, null);
+            }
+            e.Cancel = false;
+        }
+
+        private void ValidateCombo(string fieldName, ComboBox field, CancelEventArgs e)
+        {
+            if (field.Text == "" || field.Text == null)// validates null or empty
+            {
+                MessageBox.Show($"You need to set a valid {fieldName}.", "ATTENTION", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorProvider.SetError(field, $"You need to set a valid {fieldName}.");
+                e.Cancel = true;
+                field.Focus();
+            }
+            else
+            {
+                errorProvider.SetError(field, null);
+            };
+            e.Cancel = false;
+        }
+
+        private void ValidateText(string fieldName, TextBox field, CancelEventArgs e)
+        {
+            if (field.Text == "" || field.Text == null)// validates null or empty
+            {
+                MessageBox.Show($"You need to set a valid {fieldName}.", "ATTENTION", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorProvider.SetError(field, $"You need to set a valid {fieldName}.");
+                e.Cancel = true;
+                field.Focus();
+            }
+            else
+            {
+                errorProvider.SetError(field, null);
+            };
+            e.Cancel = false;
+        }
+
+        private void AddQuote_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (this.DialogResult == DialogResult.Cancel)
+            {
+                MainMenu viewMainMenu = (MainMenu)Tag;
+                viewMainMenu.Show();
             }
         }
     }

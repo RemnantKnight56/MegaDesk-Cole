@@ -10,31 +10,76 @@ namespace MegaDesk_Cole
 {
     public enum RushOrder
     {
-        None,
-        Three_Days,
-        Five_Days,
-        Seven_Days,
-        Not_Selected
+        None = 14,
+        Three_Days = 3,
+        Five_Days = 5,
+        Seven_Days = 7,
+        Not_Selected = 0
     }
 
-    public class DeskQuote
+    public class DeskQuote : Desk
     {
-        public String customerName;
-        public Desk deskOrdered;
-        public RushOrder rushDays;
+        public string customerName;
+        public string rushDays;
         public DateTime dateOrdered;
-        public const string basePrice = "200";
-        public int total;
+        public float basePrice = 200;
+        public float total;
 
-        public DeskQuote()
+        public DeskQuote(int width, int depth, int numdrawers, string material, string name, string rush, DateTime date) : base(width, depth, numdrawers, material)
         {
-            customerName = "";
-            deskOrdered = new Desk();
-            rushDays = RushOrder.Not_Selected;
-            dateOrdered = DateTime.Now;
-            total = 0;
-        }
+            SetDepth(depth);
+            SetWidth(width);
+            SetDrawers(numdrawers);
+            SetMaterial(material);
+            SetName(name);
+            SetRush(rush);
+            SetDate(date);
+            SetTotal(float.Parse(FindTotalPrice()));
 
+        }
+        //setters
+        private void SetName(string name)
+        {
+            customerName = name;
+        }
+        private void SetRush(string rush)
+        {
+            rushDays = rush;
+        }
+        private void SetDate(DateTime date)
+        {
+            dateOrdered = date;
+        }
+        private void SetTotal(float totalV)
+        {
+            total = totalV;
+        }
+        //getters
+        public string GetCustomerName()
+        {
+            return customerName;
+        }
+        public string GetRush()
+        {
+            return rushDays;
+        }
+        public DateTime GetDateTime()
+        {
+            return dateOrdered;
+        }
+        public float GetTotal()
+        {
+            return total;
+        }
+        public float GetArea()
+        {
+            return GetWidth() * GetDepth();
+        }
+        public float GetBase()
+        {
+            return basePrice;
+        }
+        //operations
         public static int[,] GetRushOrder()
         {
             int[,] rushOrderPrices = new int[3, 3];
@@ -76,44 +121,53 @@ namespace MegaDesk_Cole
 
         public string FindAreaPrice()
         {
-            int deskArea = deskOrdered.Width * deskOrdered.Depth;
+            float deskArea = GetArea();
             if (deskArea > 1000)
             {
                 return (deskArea - 1000).ToString();
             }
-            else
-            {
-                return "0";
+            return "0";
+        }
+
+        public float FindDrawerPrice()
+        {
+            return (50 * GetDrawers());
+        }
+
+        public float FindMaterialPrice() 
+        { float value;
+            switch (GetDeskMaterial()){
+                case "Pine":
+                    value = (float)DesktopMaterial.Pine;
+                    break;
+                case "Laminate":
+                    value = (float)DesktopMaterial.Laminate;
+                    break;
+                case "Veneer":
+                    value = (float)DesktopMaterial.Veneer;
+                    break;
+                case "Oak":
+                    value = (float)DesktopMaterial.Oak;
+                    break;
+                case "Rosewood":
+                    value = (float)DesktopMaterial.Rosewood;
+                    break;
+                default:
+                    value = (float)DesktopMaterial.Not_Selected;
+                    break;
             }
-        }
-
-        public string FindDrawerPrice()
-        {
-            return (50 * deskOrdered.NumDrawers).ToString();
-        }
-
-        public string FindMaterialPrice() 
-        {
-            return deskOrdered.DeskMaterial switch
-            {
-                DesktopMaterial.Pine => "50",
-                DesktopMaterial.Laminate => "100",
-                DesktopMaterial.Veneer => "125",
-                DesktopMaterial.Oak => "200",
-                DesktopMaterial.Rosewood => "300",
-                _ => "0",
-            };
+            return value;
         }
 
         public string FindRushPrice()
         {
-            int deskArea = deskOrdered.Width * deskOrdered.Depth;
+            float deskArea = GetArea();
 
             int[,] rushOrderPrices = GetRushOrder();
 
             switch (rushDays)
             {
-                case RushOrder.Three_Days:
+                case "3":
                     if (deskArea < 1000)
                         return rushOrderPrices[0, 0].ToString();
                     else if (deskArea > 2000)
@@ -121,7 +175,7 @@ namespace MegaDesk_Cole
                     else
                         return rushOrderPrices[0, 1].ToString();
 
-                case RushOrder.Five_Days:
+                case "5":
                     if (deskArea < 1000)
                         return rushOrderPrices[1, 0].ToString();
                     else if (deskArea > 2000)
@@ -129,7 +183,7 @@ namespace MegaDesk_Cole
                     else
                         return rushOrderPrices[1, 1].ToString();
 
-                case RushOrder.Seven_Days:
+                case "7":
                     if (deskArea < 1000)
                         return rushOrderPrices[2, 0].ToString();
                     else if (deskArea > 2000)
@@ -142,12 +196,11 @@ namespace MegaDesk_Cole
 
         public string FindTotalPrice ()
         {
-            int totalPrice = Convert.ToInt32(basePrice);
-            totalPrice += Convert.ToInt32(FindAreaPrice());
-            totalPrice += Convert.ToInt32(FindDrawerPrice());
-            totalPrice += Convert.ToInt32(FindMaterialPrice());
-            totalPrice += Convert.ToInt32(FindRushPrice());
-            total = totalPrice;
+            float totalPrice = basePrice;
+            totalPrice += float.Parse(FindAreaPrice());
+            totalPrice += FindDrawerPrice();
+            totalPrice += FindMaterialPrice();
+            totalPrice += float.Parse(FindRushPrice());
             return totalPrice.ToString();
         }
     }

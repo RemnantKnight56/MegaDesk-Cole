@@ -4,7 +4,7 @@ namespace MegaDesk_Cole
 {
     public partial class MainMenu : Form
     {
-        public List<DeskQuote> quotesList;
+        public List<DeskQuote> quotesList = new List<DeskQuote>();
 
         public MainMenu() => InitializeComponent();
 
@@ -47,11 +47,11 @@ namespace MegaDesk_Cole
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
+            image.SizeMode = PictureBoxSizeMode.StretchImage;
             Tools LoadData = new Tools();
-            if (File.Exists(LoadData.getDir()))
+            if (LoadData.fileExist)
             {
                 quotesList = LoadData.LoadFile();
-
             }
         }
 
@@ -61,5 +61,6 @@ namespace MegaDesk_Cole
             SaveData.SaveFile(quotesList);
             Application.Exit();
         }
+
     }
 }

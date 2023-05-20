@@ -9,19 +9,20 @@ namespace MegaDesk_Cole
 {
     public enum DesktopMaterial
     {
-        Pine,
-        Laminate,
-        Veneer,
-        Oak,
-        Rosewood,
-        Not_Selected
+        Pine = 50,
+        Laminate = 100,
+        Veneer = 125,
+        Oak = 200,
+        Rosewood = 300,
+        Not_Selected = 0
     }
+
     public class Desk
     {
-        public int Width { get; set; }
-        public int Depth { get; set; }
-        public int NumDrawers { get; set; }
-        public DesktopMaterial DeskMaterial { get; set; }
+        public int Width;
+        public int Depth;
+        public int NumDrawers;
+        public string DeskMaterial;
 
         public const int deskWidthMax = 96;
         public const int deskWidthMin = 24;
@@ -30,12 +31,48 @@ namespace MegaDesk_Cole
         public const int maxDrawers = 7;
         public const int minDrawers = 0;
 
-        public Desk()
+        public Desk(int width, int depth, int numdrawers, string material)
         {
-            Width = 0;
-            Depth = 0;
-            NumDrawers = 0;
-            DeskMaterial = DesktopMaterial.Not_Selected;
+            Width = width;
+            Depth = depth;
+            NumDrawers = numdrawers;
+            DeskMaterial = material;
         }
+
+        // setters
+        protected void SetWidth(int width)
+        {
+            Width = width;
+        }
+        protected void SetDepth(int depth)
+        {
+            Depth = depth;
+        }
+        protected void SetDrawers(int drawers)
+        {
+            NumDrawers = drawers;
+        }
+        protected void SetMaterial(string material)
+        {
+            DeskMaterial = material;
+        }
+        //getters
+        internal int GetWidth()
+        {
+            return Width;
+        }
+        internal int GetDepth()
+        {
+            return Depth;
+        }
+        internal int GetDrawers()
+        {
+            return NumDrawers;
+        }
+        internal string GetDeskMaterial()
+        {
+            return DeskMaterial;
+        }
+
     }
 }

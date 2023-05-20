@@ -26,14 +26,14 @@ namespace MegaDesk_Cole
                 int rowID = dataGrid.Rows.Add();
                 DataGridViewRow row = dataGrid.Rows[rowID];
 
-                row.Cells["namesColumn"].Value = item.customerName;
-                row.Cells["pricesColumn"].Value = item.total;
-                row.Cells["datesColumn"].Value = item.dateOrdered.Date;
-                row.Cells["widthsColumn"].Value = item.deskOrdered.Width;
-                row.Cells["depthsColumn"].Value = item.deskOrdered.Depth;
-                row.Cells["drawerColumn"].Value = item.deskOrdered.NumDrawers;
-                row.Cells["rushDaysColumn"].Value = item.rushDays.ToString();
-                row.Cells["materialsColumn"].Value = item.deskOrdered.DeskMaterial.ToString();
+                row.Cells["namesColumn"].Value = item.GetCustomerName();
+                row.Cells["pricesColumn"].Value = item.GetTotal();
+                row.Cells["datesColumn"].Value = item.GetDateTime();
+                row.Cells["widthsColumn"].Value = item.GetWidth();
+                row.Cells["depthsColumn"].Value = item.GetDepth();
+                row.Cells["drawerColumn"].Value = item.GetDrawers();
+                row.Cells["rushDaysColumn"].Value = item.GetRush().ToString();
+                row.Cells["materialsColumn"].Value = item.GetDeskMaterial().ToString();
             }
         }
 
@@ -47,9 +47,15 @@ namespace MegaDesk_Cole
         private void dataGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             //MainMenu viewMainMenu = (MainMenu)Tag;
-            
+
             //DisplayQuote displayMenu = new(viewMainMenu.quotesList[dataGrid.SelectedRows[0].Index]);
             //displayMenu.Show();
+        }
+
+        private void ViewAllQuotes_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MainMenu viewMainMenu = (MainMenu)Tag;
+            viewMainMenu.Show();
         }
     }
 }

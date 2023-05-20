@@ -20,53 +20,51 @@ namespace MegaDesk_Cole
         public DisplayQuote(DeskQuote deskQuote)
         {
             InitializeComponent();
-            nameBox.Text = deskQuote.customerName;
-            widthBox.Text = deskQuote.deskOrdered.Width.ToString();
-            depthBox.Text = deskQuote.deskOrdered.Depth.ToString();
-            drawersBox.Text = deskQuote.deskOrdered.NumDrawers.ToString();
-            materialBox.Text = deskQuote.deskOrdered.DeskMaterial.ToString();
+            nameBox.Text = deskQuote.GetCustomerName();
+            widthBox.Text = deskQuote.GetWidth().ToString();
+            depthBox.Text = deskQuote.GetDepth().ToString();
+            drawersBox.Text = deskQuote.GetDrawers().ToString();
+            materialBox.Text = deskQuote.GetDeskMaterial();
 
-            switch (deskQuote.rushDays)
+            switch (deskQuote.GetRush())
             {
-                case RushOrder.Three_Days:
+                case "3":
                     rushBox.Text = "3 Days";
                     break;
 
-                case RushOrder.Five_Days:
+                case "5":
                     rushBox.Text = "5 Days";
                     break;
 
-                case RushOrder.Seven_Days:
+                case "7":
                     rushBox.Text = "7 Days";
-                    break;
-                case RushOrder.None:
-                    break;
-                case RushOrder.Not_Selected:
                     break;
                 default:
                     rushBox.Text = "N/A";
                     break;
             }
 
-            FigurePrices(deskQuote);
-        }
-
-        private void FigurePrices(DeskQuote deskQuote)
-        {
-            areaValue.Text = (deskQuote.deskOrdered.Width * deskQuote.deskOrdered.Depth).ToString();
-            baseValue.Text = DeskQuote.basePrice;
+            areaValue.Text = deskQuote.GetArea().ToString();
+            baseValue.Text = deskQuote.GetBase().ToString();
             areaCostValue.Text = deskQuote.FindAreaPrice();
-            drawerCostValue.Text = deskQuote.FindDrawerPrice();
-            materialCostValue.Text = deskQuote.FindMaterialPrice();
+            drawerCostValue.Text = deskQuote.FindDrawerPrice().ToString();
+            materialCostValue.Text = deskQuote.FindMaterialPrice().ToString();
             rushOrderValue.Text = deskQuote.FindRushPrice();
-            totalValue.Text = deskQuote.FindTotalPrice();
-        }
+            totalValue.Text = deskQuote.GetTotal().ToString();
 
+            
+        }
         private void ExitButton_Click(object sender, EventArgs e)
         {
-            //MainMenu viewMainMenu = (MainMenu)Tag;
-            //viewMainMenu.Show();
+            MainMenu viewMainMenu = (MainMenu)Tag;
+            viewMainMenu.Show();
             Close();
+        }
+
+        private void DisplayQuote_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MainMenu viewMainMenu = (MainMenu)Tag;
+            viewMainMenu.Show();
         }
     }
 }
