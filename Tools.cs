@@ -19,7 +19,7 @@ namespace MegaDesk_Cole
             }
             }
         private string dirPath = "C:\\MegaDesk\\";
-        private string fileName = "MegaDeskDataSource.json";
+        private string fileName = "quotes.json";
         public bool fileExist = false;
         private string GenerateJson(List<DeskQuote> deskQ)
         {
