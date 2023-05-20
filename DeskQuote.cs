@@ -54,6 +54,7 @@ namespace MegaDesk_Cole
         {
             total = totalV;
         }
+
         //getters
         public string GetCustomerName()
         {

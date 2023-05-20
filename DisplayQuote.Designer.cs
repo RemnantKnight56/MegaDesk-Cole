@@ -63,10 +63,9 @@
             // 
             nameLabel.AutoSize = true;
             nameLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            nameLabel.Location = new Point(2, 25);
-            nameLabel.Margin = new Padding(4, 0, 4, 0);
+            nameLabel.Location = new Point(1, 15);
             nameLabel.Name = "nameLabel";
-            nameLabel.Size = new Size(169, 28);
+            nameLabel.Size = new Size(121, 19);
             nameLabel.TabIndex = 0;
             nameLabel.Text = "Customer Name:";
             // 
@@ -74,10 +73,9 @@
             // 
             widthLabel.AutoSize = true;
             widthLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            widthLabel.Location = new Point(44, 80);
-            widthLabel.Margin = new Padding(4, 0, 4, 0);
+            widthLabel.Location = new Point(31, 48);
             widthLabel.Name = "widthLabel";
-            widthLabel.Size = new Size(127, 28);
+            widthLabel.Size = new Size(89, 19);
             widthLabel.TabIndex = 1;
             widthLabel.Text = "Desk Width:";
             // 
@@ -85,10 +83,9 @@
             // 
             depthLabel.AutoSize = true;
             depthLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            depthLabel.Location = new Point(341, 80);
-            depthLabel.Margin = new Padding(4, 0, 4, 0);
+            depthLabel.Location = new Point(239, 48);
             depthLabel.Name = "depthLabel";
-            depthLabel.Size = new Size(127, 28);
+            depthLabel.Size = new Size(89, 19);
             depthLabel.TabIndex = 2;
             depthLabel.Text = "Desk Depth:";
             // 
@@ -96,10 +93,9 @@
             // 
             drawerLabel.AutoSize = true;
             drawerLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            drawerLabel.Location = new Point(32, 130);
-            drawerLabel.Margin = new Padding(4, 0, 4, 0);
+            drawerLabel.Location = new Point(22, 78);
             drawerLabel.Name = "drawerLabel";
-            drawerLabel.Size = new Size(139, 28);
+            drawerLabel.Size = new Size(98, 19);
             drawerLabel.TabIndex = 3;
             drawerLabel.Text = "# of Drawers:";
             // 
@@ -107,10 +103,9 @@
             // 
             rushLabel.AutoSize = true;
             rushLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            rushLabel.Location = new Point(354, 134);
-            rushLabel.Margin = new Padding(4, 0, 4, 0);
+            rushLabel.Location = new Point(248, 80);
             rushLabel.Name = "rushLabel";
-            rushLabel.Size = new Size(114, 28);
+            rushLabel.Size = new Size(80, 19);
             rushLabel.TabIndex = 4;
             rushLabel.Text = "Rush Type:";
             // 
@@ -118,85 +113,77 @@
             // 
             materialLabel.AutoSize = true;
             materialLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            materialLabel.Location = new Point(74, 181);
-            materialLabel.Margin = new Padding(4, 0, 4, 0);
+            materialLabel.Location = new Point(52, 109);
             materialLabel.Name = "materialLabel";
-            materialLabel.Size = new Size(97, 28);
+            materialLabel.Size = new Size(69, 19);
             materialLabel.TabIndex = 5;
             materialLabel.Text = "Material:";
             // 
             // nameBox
             // 
             nameBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            nameBox.Location = new Point(178, 20);
-            nameBox.Margin = new Padding(4, 5, 4, 5);
+            nameBox.Location = new Point(125, 12);
             nameBox.Name = "nameBox";
             nameBox.ReadOnly = true;
-            nameBox.Size = new Size(437, 39);
+            nameBox.Size = new Size(307, 29);
             nameBox.TabIndex = 6;
             // 
             // widthBox
             // 
             widthBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            widthBox.Location = new Point(178, 75);
-            widthBox.Margin = new Padding(4, 5, 4, 5);
+            widthBox.Location = new Point(125, 45);
             widthBox.Name = "widthBox";
             widthBox.ReadOnly = true;
-            widthBox.Size = new Size(141, 39);
+            widthBox.Size = new Size(100, 29);
             widthBox.TabIndex = 7;
             widthBox.TextAlign = HorizontalAlignment.Center;
             // 
             // depthBox
             // 
             depthBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            depthBox.Location = new Point(474, 75);
-            depthBox.Margin = new Padding(4, 5, 4, 5);
+            depthBox.Location = new Point(332, 45);
             depthBox.Name = "depthBox";
             depthBox.ReadOnly = true;
-            depthBox.Size = new Size(141, 39);
+            depthBox.Size = new Size(100, 29);
             depthBox.TabIndex = 8;
             depthBox.TextAlign = HorizontalAlignment.Center;
             // 
             // drawersBox
             // 
             drawersBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            drawersBox.Location = new Point(178, 125);
-            drawersBox.Margin = new Padding(4, 5, 4, 5);
+            drawersBox.Location = new Point(125, 75);
             drawersBox.Name = "drawersBox";
             drawersBox.ReadOnly = true;
-            drawersBox.Size = new Size(141, 39);
+            drawersBox.Size = new Size(100, 29);
             drawersBox.TabIndex = 9;
             drawersBox.TextAlign = HorizontalAlignment.Center;
             // 
             // materialBox
             // 
             materialBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            materialBox.Location = new Point(178, 176);
-            materialBox.Margin = new Padding(4, 5, 4, 5);
+            materialBox.Location = new Point(125, 106);
             materialBox.Name = "materialBox";
             materialBox.ReadOnly = true;
-            materialBox.Size = new Size(141, 39);
+            materialBox.Size = new Size(100, 29);
             materialBox.TabIndex = 10;
             materialBox.TextAlign = HorizontalAlignment.Center;
             // 
             // rushBox
             // 
             rushBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            rushBox.Location = new Point(474, 129);
-            rushBox.Margin = new Padding(4, 5, 4, 5);
+            rushBox.Location = new Point(332, 77);
             rushBox.Name = "rushBox";
             rushBox.ReadOnly = true;
-            rushBox.Size = new Size(141, 39);
+            rushBox.Size = new Size(100, 29);
             rushBox.TabIndex = 11;
             rushBox.TextAlign = HorizontalAlignment.Center;
             // 
             // exitButton
             // 
             exitButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            exitButton.Location = new Point(426, 390);
-            exitButton.Margin = new Padding(4, 5, 4, 5);
+            exitButton.Location = new Point(298, 234);
             exitButton.Name = "exitButton";
-            exitButton.Size = new Size(107, 45);
+            exitButton.Size = new Size(75, 27);
             exitButton.TabIndex = 12;
             exitButton.Text = "Exit";
             exitButton.UseVisualStyleBackColor = true;
@@ -206,10 +193,9 @@
             // 
             baseLabel.AutoSize = true;
             baseLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            baseLabel.Location = new Point(57, 237);
-            baseLabel.Margin = new Padding(4, 0, 4, 0);
+            baseLabel.Location = new Point(40, 142);
             baseLabel.Name = "baseLabel";
-            baseLabel.Size = new Size(132, 28);
+            baseLabel.Size = new Size(94, 19);
             baseLabel.TabIndex = 13;
             baseLabel.Text = "Base Price: $";
             // 
@@ -217,10 +203,9 @@
             // 
             areaLabel.AutoSize = true;
             areaLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            areaLabel.Location = new Point(330, 181);
-            areaLabel.Margin = new Padding(4, 0, 4, 0);
+            areaLabel.Location = new Point(231, 109);
             areaLabel.Name = "areaLabel";
-            areaLabel.Size = new Size(138, 28);
+            areaLabel.Size = new Size(99, 19);
             areaLabel.TabIndex = 14;
             areaLabel.Text = "Surface Area:";
             // 
@@ -228,10 +213,9 @@
             // 
             areaValue.AutoSize = true;
             areaValue.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            areaValue.Location = new Point(496, 176);
-            areaValue.Margin = new Padding(4, 0, 4, 0);
+            areaValue.Location = new Point(347, 106);
             areaValue.Name = "areaValue";
-            areaValue.Size = new Size(27, 32);
+            areaValue.Size = new Size(19, 21);
             areaValue.TabIndex = 15;
             areaValue.Text = "0";
             // 
@@ -240,10 +224,9 @@
             unitLabel.AutoSize = true;
             unitLabel.BackColor = SystemColors.ButtonFace;
             unitLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            unitLabel.Location = new Point(567, 176);
-            unitLabel.Margin = new Padding(4, 0, 4, 0);
+            unitLabel.Location = new Point(372, 107);
             unitLabel.Name = "unitLabel";
-            unitLabel.Size = new Size(34, 32);
+            unitLabel.Size = new Size(23, 21);
             unitLabel.TabIndex = 16;
             unitLabel.Text = "in";
             // 
@@ -251,10 +234,9 @@
             // 
             baseValue.AutoSize = true;
             baseValue.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            baseValue.Location = new Point(194, 237);
-            baseValue.Margin = new Padding(4, 0, 4, 0);
+            baseValue.Location = new Point(136, 142);
             baseValue.Name = "baseValue";
-            baseValue.Size = new Size(27, 32);
+            baseValue.Size = new Size(19, 21);
             baseValue.TabIndex = 17;
             baseValue.Text = "0";
             // 
@@ -262,10 +244,9 @@
             // 
             areaPriceLabel.AutoSize = true;
             areaPriceLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            areaPriceLabel.Location = new Point(63, 271);
-            areaPriceLabel.Margin = new Padding(4, 0, 4, 0);
+            areaPriceLabel.Location = new Point(44, 163);
             areaPriceLabel.Name = "areaPriceLabel";
-            areaPriceLabel.Size = new Size(126, 28);
+            areaPriceLabel.Size = new Size(90, 19);
             areaPriceLabel.TabIndex = 18;
             areaPriceLabel.Text = "Area Cost: $";
             // 
@@ -273,10 +254,9 @@
             // 
             areaCostValue.AutoSize = true;
             areaCostValue.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            areaCostValue.Location = new Point(194, 271);
-            areaCostValue.Margin = new Padding(4, 0, 4, 0);
+            areaCostValue.Location = new Point(136, 163);
             areaCostValue.Name = "areaCostValue";
-            areaCostValue.Size = new Size(27, 32);
+            areaCostValue.Size = new Size(19, 21);
             areaCostValue.TabIndex = 19;
             areaCostValue.Text = "0";
             // 
@@ -284,10 +264,9 @@
             // 
             materialCostValue.AutoSize = true;
             materialCostValue.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            materialCostValue.Location = new Point(194, 339);
-            materialCostValue.Margin = new Padding(4, 0, 4, 0);
+            materialCostValue.Location = new Point(136, 203);
             materialCostValue.Name = "materialCostValue";
-            materialCostValue.Size = new Size(27, 32);
+            materialCostValue.Size = new Size(19, 21);
             materialCostValue.TabIndex = 21;
             materialCostValue.Text = "0";
             // 
@@ -295,10 +274,9 @@
             // 
             materialCostLabel.AutoSize = true;
             materialCostLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            materialCostLabel.Location = new Point(27, 339);
-            materialCostLabel.Margin = new Padding(4, 0, 4, 0);
+            materialCostLabel.Location = new Point(19, 203);
             materialCostLabel.Name = "materialCostLabel";
-            materialCostLabel.Size = new Size(162, 28);
+            materialCostLabel.Size = new Size(114, 19);
             materialCostLabel.TabIndex = 20;
             materialCostLabel.Text = "Material Cost: $";
             // 
@@ -306,10 +284,9 @@
             // 
             rushOrderValue.AutoSize = true;
             rushOrderValue.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            rushOrderValue.Location = new Point(194, 373);
-            rushOrderValue.Margin = new Padding(4, 0, 4, 0);
+            rushOrderValue.Location = new Point(136, 224);
             rushOrderValue.Name = "rushOrderValue";
-            rushOrderValue.Size = new Size(27, 32);
+            rushOrderValue.Size = new Size(19, 21);
             rushOrderValue.TabIndex = 23;
             rushOrderValue.Text = "0";
             // 
@@ -317,10 +294,9 @@
             // 
             rushOrderLabel.AutoSize = true;
             rushOrderLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            rushOrderLabel.Location = new Point(1, 373);
-            rushOrderLabel.Margin = new Padding(4, 0, 4, 0);
+            rushOrderLabel.Location = new Point(1, 224);
             rushOrderLabel.Name = "rushOrderLabel";
-            rushOrderLabel.Size = new Size(188, 28);
+            rushOrderLabel.Size = new Size(133, 19);
             rushOrderLabel.TabIndex = 22;
             rushOrderLabel.Text = "Rush Order Cost: $";
             // 
@@ -328,10 +304,9 @@
             // 
             totalLabel.AutoSize = true;
             totalLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            totalLabel.Location = new Point(107, 407);
-            totalLabel.Margin = new Padding(4, 0, 4, 0);
+            totalLabel.Location = new Point(75, 244);
             totalLabel.Name = "totalLabel";
-            totalLabel.Size = new Size(82, 28);
+            totalLabel.Size = new Size(58, 19);
             totalLabel.TabIndex = 24;
             totalLabel.Text = "Total: $";
             // 
@@ -339,10 +314,9 @@
             // 
             totalValue.AutoSize = true;
             totalValue.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            totalValue.Location = new Point(194, 407);
-            totalValue.Margin = new Padding(4, 0, 4, 0);
+            totalValue.Location = new Point(136, 244);
             totalValue.Name = "totalValue";
-            totalValue.Size = new Size(27, 32);
+            totalValue.Size = new Size(19, 21);
             totalValue.TabIndex = 25;
             totalValue.Text = "0";
             // 
@@ -350,10 +324,9 @@
             // 
             drawerCostValue.AutoSize = true;
             drawerCostValue.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            drawerCostValue.Location = new Point(194, 305);
-            drawerCostValue.Margin = new Padding(4, 0, 4, 0);
+            drawerCostValue.Location = new Point(136, 183);
             drawerCostValue.Name = "drawerCostValue";
-            drawerCostValue.Size = new Size(27, 32);
+            drawerCostValue.Size = new Size(19, 21);
             drawerCostValue.TabIndex = 27;
             drawerCostValue.Text = "0";
             // 
@@ -361,10 +334,9 @@
             // 
             drawerCostLabel.AutoSize = true;
             drawerCostLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            drawerCostLabel.Location = new Point(38, 305);
-            drawerCostLabel.Margin = new Padding(4, 0, 4, 0);
+            drawerCostLabel.Location = new Point(27, 183);
             drawerCostLabel.Name = "drawerCostLabel";
-            drawerCostLabel.Size = new Size(151, 28);
+            drawerCostLabel.Size = new Size(107, 19);
             drawerCostLabel.TabIndex = 26;
             drawerCostLabel.Text = "Drawer Cost: $";
             // 
@@ -372,18 +344,17 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(592, 169);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Location = new Point(391, 106);
             label1.Name = "label1";
-            label1.Size = new Size(23, 28);
+            label1.Size = new Size(17, 19);
             label1.TabIndex = 28;
             label1.Text = "2";
             // 
             // DisplayQuote
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(640, 464);
+            ClientSize = new Size(448, 278);
             Controls.Add(label1);
             Controls.Add(unitLabel);
             Controls.Add(drawerCostValue);
@@ -413,7 +384,6 @@
             Controls.Add(depthLabel);
             Controls.Add(widthLabel);
             Controls.Add(nameLabel);
-            Margin = new Padding(4, 5, 4, 5);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "DisplayQuote";

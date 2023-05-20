@@ -83,8 +83,8 @@ namespace MegaDesk_Cole
             bool isNum = Int32.TryParse(field.Text, out input);
             if (!isNum) // if its not numeric
             {
-                MessageBox.Show($"You might only use numeric characters in the field {fieldName}.", "ATTENTION", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                errorProvider.SetError(field, "You might only use numeric characters in this field.");
+                MessageBox.Show($"You may only use numeric characters in the field {fieldName}.", "ATTENTION", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorProvider.SetError(field, "You may only use numeric characters in this field.");
                 e.Cancel = true;
                 field.Focus();
             }
@@ -107,8 +107,8 @@ namespace MegaDesk_Cole
             bool isNum = Int32.TryParse(field.Text, out input);
             if (!isNum) // if its not numeric
             {
-                MessageBox.Show($"You might only use numeric characters in the field {fieldName}.", "ATTENTION", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                errorProvider.SetError(field, "You might only use numeric characters in this field.");
+                MessageBox.Show($"You may only use numeric characters in the field {fieldName}.", "ATTENTION", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorProvider.SetError(field, "You may only use numeric characters in this field.");
                 e.Cancel = true;
                 field.Focus();
             }

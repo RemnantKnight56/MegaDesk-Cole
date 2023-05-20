@@ -52,7 +52,7 @@ namespace MegaDesk_Cole
             rushOrderValue.Text = deskQuote.FindRushPrice();
             totalValue.Text = deskQuote.GetTotal().ToString();
 
-            
+
         }
         private void ExitButton_Click(object sender, EventArgs e)
         {

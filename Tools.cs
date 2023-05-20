@@ -18,8 +18,8 @@ namespace MegaDesk_Cole
                 fileExist = true;
             }
             }
-        private string dirPath = "C:\\MegaDesk\\";
-        private string fileName = "quotes.json";
+        //private string dirPath = @"C:\MegaDesk\";
+        private string fileName = @"\quotes.json";
         public bool fileExist = false;
         private string GenerateJson(List<DeskQuote> deskQ)
         {
@@ -37,9 +37,9 @@ namespace MegaDesk_Cole
 
         public List<DeskQuote> LoadFile()
         {
-            if (!Directory.Exists(dirPath)){
+            /*if (!Directory.Exists(dirPath)){
                 Directory.CreateDirectory(dirPath);
-            }
+            }*/
 
             if (File.Exists(getDir()))
             {
@@ -54,7 +54,9 @@ namespace MegaDesk_Cole
 
         private string getDir()
         {
-            return dirPath+fileName;
+            string filepath = Path.GetDirectoryName(Application.ExecutablePath);
+            filepath += fileName;
+            return filepath;
         }
 
     }
